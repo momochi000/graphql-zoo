@@ -1,5 +1,0 @@
-
-* Tasks
-** TODO bootstrap new rails app
-** TODO create schema
-** TODO install + configure graphql
