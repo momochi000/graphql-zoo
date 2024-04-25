@@ -96,7 +96,7 @@ no different functionality exposed/hidden from different user types
 ----
 animals
   belongs_to :habitat
-  has_many :notes, through: :note_tags
+  has_many :notes, as: notable
 
   status: string (enum)
   feeding_times: array/list (timestamp)
@@ -104,7 +104,7 @@ animals
 
 habitats
   has_many :animals
-  has_many :notes, through: :note_tags
+  has_many :notes, as: :notable
 
   name: string
   environment_description: json
@@ -130,7 +130,7 @@ notes
   content: text
   has_many: note_tags
   belongs_to: author (employee)
-  belongs_to: targetable (what the note applies to, need better naming)
+  belongs_to: notable (what the note applies to, need better naming)
 
 
 ## rough/strawman UX
