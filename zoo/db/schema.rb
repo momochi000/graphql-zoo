@@ -10,19 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_25_181852) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_26_014702) do
   create_table "animals", force: :cascade do |t|
-    t.string "status"
+    t.integer "status"
     t.json "feeding_times"
     t.json "info"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "habitat_id"
+    t.string "name"
+    t.string "species"
     t.index ["habitat_id"], name: "index_animals_on_habitat_id"
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string "role"
+    t.integer "role"
     t.json "tasks"
     t.string "auth_token"
     t.datetime "created_at", null: false
