@@ -1,5 +1,5 @@
 class Animal < ApplicationRecord
-  belongs_to :habitiat
+  belongs_to :habitat
 
   enum status: [:healthy, :sick, :injured, :depressed]
 end
