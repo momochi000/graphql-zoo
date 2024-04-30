@@ -6,6 +6,7 @@ module Types
     field :status, String
     field :feeding_times, GraphQL::Types::JSON
     field :info, GraphQL::Types::JSON
+    field :notes, [Types::NoteType]
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
     field :habitat_id, Integer

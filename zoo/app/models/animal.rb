@@ -10,4 +10,8 @@ class Animal < ApplicationRecord
     return [] unless info.present?
     info["dietary_requirements"]
   end
+
+  def self.needs_attention_statuses
+    [:sick, :injured, :depressed, :needs_attention]
+  end
 end

@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 describe "animalCreate graphql query root field" do
   let(:new_animal_name) { "cody" }

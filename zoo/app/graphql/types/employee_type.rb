@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
 module Types
-  class HabitatType < Types::BaseObject
+  class EmployeeType < Types::BaseObject
     field :id, ID, null: false
-    field :name, String
-    field :notes, [Types::NoteType]
-    field :environment_description, GraphQL::Types::JSON
+    field :role, String
+    field :tasks, GraphQL::Types::JSON
+    field :auth_token, String
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :animals, [Types::AnimalType]
+    field :manager_id, Integer
   end
 end

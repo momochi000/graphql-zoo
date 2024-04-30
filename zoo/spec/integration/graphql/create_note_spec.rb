@@ -49,7 +49,7 @@ describe "noteCreate graphql query root field" do
         }
 
         it "creates the note" do
-          expect {subject}.to change {Note.count }.by(1)
+          expect {subject}.to change {Note.count}.by(1)
           output = subject["data"]["noteCreate"]["note"]
           expect(output["content"]).to eq note_content
         end

@@ -6,21 +6,23 @@ module Api
           habitat = in_habitat.to_h
           begin
             if habitat[:id].present?
-              query = Habitat.find(habitat[:id]).animals.includes(:habitat)
+              query = Habitat.find(habitat[:id]).animals.includes([:habitat, {notes: :author}])
             elsif habitat[:name].present?
-              query = Habitat.find_by('lower(name) = ?', habitat[:name].downcase).animals.includes(:habitat)
+              query = Habitat.find_by('lower(name) = ?', habitat[:name].downcase).animals.includes([:habitat, {notes: :author}])
             else
+              raise Exception.new("Attempting to filter by habitat but id or name not given")
               # TODO: Error
             end
           rescue
             # TODO: Create an error class
-            raise "We couldn't find that habitat"
+            raise Exception.new("We couldn't find that habitat")
           end
         else
-          query = Animal.includes(:habitat)
+          query = Animal.includes([:habitat, {notes: :author}])
         end
+
         if needing_attention
-          query = query.where('status in ?', [:sick, :injured, :needs_attention, :depressed])
+          query = query.where(status: Animal.needs_attention_statuses)
         end
 
         query.limit(10) # TODO: Implement some kind of default here
