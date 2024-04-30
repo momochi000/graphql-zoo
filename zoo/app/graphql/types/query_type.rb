@@ -21,43 +21,28 @@ module Types
     # Add root-level fields here.
     # They will be entry points for queries on your schema.
 
-    # TODO: remove me
-    #field :test_field, String, null: false,
-    #  description: "An example field added by the generator"
-    #def test_field
-    #  "Hello World!"
-    #end
-
     field :get_animal, Types::AnimalType, null: false do
-      argument :id, ID, required: true, description: "Get a specific animal."
+      argument :id, ID, required: true, description: "Get a specific animal by id."
     end
 
     def get_animal(id:)
       Animal.find(id)
     end
 
-    field :get_animals, [Types::AnimalType], null: false do
-      description "Does this work?"
-      argument :in_habitat, String, required: false
+    field :get_animals, Types::AnimalsPayloadType, null: false do
+      description "Return a list of animals. optionally filter by habitat with argument `in_habitat`. Filter for animals which need attention with `needing_attention`"
+      #argument :in_habitat, String, required: false
+      argument :in_habitat, InHabitatInputType, required: false
       argument :needing_attention, Boolean, required: false
     end
 
-    def get_animals(in_habitat: nil, needing_attention: nil)
-      p "DEBUG: animals_in_habitat: is this getting called?? habitat name is ---> #{in_habitat}, needing_attention is --> #{needing_attention}"
-      if in_habitat
-        query = Habitat.find_by('lower(name) = ?', in_habitat.downcase).animals.includes(:habitat)
-        p "DEBUG: output of get_animals ---> #{result}"
-      else
-        query = Animal.includes(:habitat)
-      end
-      if needing_attention
-        query = query.where('status in ?', [:sick, :injured, :needs_attention, :depressed])
-      end
-
-      query.limit(10) # TODO: Implement some kind of default here
-    rescue Exception
-      p "DEBUG: error here"
-      [] # or however you want to handle errors
+    def get_animals(**args)
+#      p "DEBUG: Types::QueryType#get_animals  called with args ---->#{args}"
+      {animals: Api::GetAnimals.execute(**args)}
+    rescue Exception => e
+#      p "DEBUG: error here,. exception --> ==#{e}=="
+      {errors: [e]}
+      #[] # or however you want to handle errors
     end
   end
 end
