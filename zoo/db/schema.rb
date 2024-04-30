@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_26_014702) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_30_201120) do
   create_table "animals", force: :cascade do |t|
     t.integer "status"
     t.json "feeding_times"
@@ -43,8 +43,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_26_014702) do
 
   create_table "notes", force: :cascade do |t|
     t.text "content"
-    t.string "notable_type", null: false
-    t.integer "notable_id", null: false
+    t.string "notable_type"
+    t.integer "notable_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "employee_id"
