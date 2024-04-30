@@ -31,8 +31,10 @@ module Types
 
     field :get_animals, Types::AnimalsPayloadType, null: false do
       description "Return a list of animals. optionally filter by habitat with argument `in_habitat`. Filter for animals which need attention with `needing_attention`"
+
       argument :in_habitat, InHabitatInputType, required: false
       argument :needing_attention, Boolean, required: false
+      argument :limit, Integer, required: false
     end
 
     def get_animals(**args)

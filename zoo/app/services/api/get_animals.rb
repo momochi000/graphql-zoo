@@ -1,7 +1,7 @@
 module Api
   module GetAnimals
     class << self
-      def execute(in_habitat: nil, needing_attention: nil)
+      def execute(in_habitat: nil, needing_attention: nil, limit: 10)
         if in_habitat.present?
           habitat = in_habitat.to_h
           begin
@@ -10,8 +10,8 @@ module Api
             elsif habitat[:name].present?
               query = Habitat.find_by('lower(name) = ?', habitat[:name].downcase).animals.includes([:habitat, {notes: :author}])
             else
+              # TODO: Create an error class
               raise Exception.new("Attempting to filter by habitat but id or name not given")
-              # TODO: Error
             end
           rescue
             # TODO: Create an error class
@@ -25,7 +25,7 @@ module Api
           query = query.where(status: Animal.needs_attention_statuses)
         end
 
-        query.limit(10) # TODO: Implement some kind of default here
+        query.limit(limit)
       end
     end
   end
