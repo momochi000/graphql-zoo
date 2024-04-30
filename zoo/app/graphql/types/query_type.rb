@@ -37,12 +37,9 @@ module Types
     end
 
     def get_animals(**args)
-#      p "DEBUG: Types::QueryType#get_animals  called with args ---->#{args}"
       {animals: Api::GetAnimals.execute(**args)}
     rescue Exception => e
-#      p "DEBUG: error here,. exception --> ==#{e}=="
       {errors: [e]}
-      #[] # or however you want to handle errors
     end
   end
 end

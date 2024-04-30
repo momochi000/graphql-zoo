@@ -2,10 +2,8 @@ module Api
   module GetAnimals
     class << self
       def execute(in_habitat: nil, needing_attention: nil)
-#        p "DEBUG: in Api::GetAnimals"
         if in_habitat.present?
           habitat = in_habitat.to_h
-##          p "DEBUG: habitat data ---> #{habitat}"
           begin
             if habitat[:id].present?
               query = Habitat.find(habitat[:id]).animals.includes(:habitat)

@@ -11,7 +11,6 @@ module Mutations
 
     #TODO: Move this logic to api
     def resolve(note_input:)
-      p "DEBUG: in Mutations::NoteCreate#resolve with note input ----> #{note_input.to_h}"
       note_params = note_input.to_h
       if note_input.note_attachment.present?
         if !note_input.note_attachment.notable_type.present? || !note_input.note_attachment.notable_id.present?
