@@ -1,4 +1,3 @@
-require 'pry'
 module Api
   module CreateNote
     class << self
