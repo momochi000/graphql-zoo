@@ -11,7 +11,7 @@ module Mutations
 
     #TODO: Move this logic to api
     def resolve(note_input:)
-      { note: Api::CreateNote.execute(note_params.to_h) }
+      { note: Api::CreateNote.execute(note_input.to_h) }
     rescue Exception => e
       { errors: [e] }
     end
