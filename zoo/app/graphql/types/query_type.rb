@@ -37,8 +37,8 @@ module Types
       argument :limit, Integer, required: false
     end
 
-    def get_animals(**args)
-      {animals: Api::GetAnimals.execute(**args.to_h)}
+    def get_animals(**get_animals_args)
+      {animals: Api::GetAnimals.execute(**get_animals_args.to_h)}
     rescue Exception => e
       {errors: [e]}
     end
