@@ -10,8 +10,7 @@ module Mutations
     argument :animal_input, Types::AnimalInputType, required: true
 
     def resolve(animal_input:)
-      animal = Api::CreateAnimal.execute(animal_input)
-      { animal: animal }
+      { animal: Api::CreateAnimal.execute(animal_input.to_h) }
     rescue Exception => e
       { errors: [e] }
     end
