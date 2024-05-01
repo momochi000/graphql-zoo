@@ -4,7 +4,7 @@ class Animal < ApplicationRecord
 
   accepts_nested_attributes_for :habitat
 
-  enum status: [:healthy, :sick, :injured, :depressed, :needs_attention]
+  enum :status, [:healthy, :sick, :injured, :depressed, :needs_attention], default: :healthy
 
   def dietary_requirements
     return [] unless info.present?

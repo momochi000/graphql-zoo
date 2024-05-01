@@ -3,7 +3,7 @@ module Api
     class << self
       def execute(in_habitat: nil, needing_attention: nil, limit: 10)
         if in_habitat.present?
-          habitat = in_habitat.to_h
+          habitat = in_habitat
           begin
             if habitat[:id].present?
               query = Habitat.find(habitat[:id]).animals.includes([:habitat, {notes: :author}])

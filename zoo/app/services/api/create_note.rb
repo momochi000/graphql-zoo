@@ -12,12 +12,12 @@ module Api
             notable_id: create_note_args[:note_attachment][:notable_id],
           }
           create_note_args.delete(:note_attachment)
-          note = ::Note.new(**create_note_args, **note_attachment_params)
-          raise Exception.new "Error creating note: #{note.errors.to_hash}" unless note.save
+          note = ::Note.create(**create_note_args, **note_attachment_params)
+          raise Exception.new "Error creating note: #{note.errors.to_hash}" unless note.persisted?
 
         else
-          note = ::Note.new(**create_note_args)
-          raise Exception.new "Error creating note: #{note.errors.to_hash}" unless note.save
+          note = ::Note.create(**create_note_args)
+          raise Exception.new "Error creating note: #{note.errors.to_hash}" unless note.persisted?
         end
         note
       end

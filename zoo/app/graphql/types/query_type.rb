@@ -38,7 +38,7 @@ module Types
     end
 
     def get_animals(**args)
-      {animals: Api::GetAnimals.execute(**args)}
+      {animals: Api::GetAnimals.execute(**args.to_h)}
     rescue Exception => e
       {errors: [e]}
     end

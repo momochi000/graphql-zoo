@@ -6,5 +6,5 @@ class Employee < ApplicationRecord
   has_many :notes, inverse_of: :author
 
   accepts_nested_attributes_for :pii
-  enum role: [:caretaker, :vet, :manager]
+  enum :role, [:caretaker, :vet, :manager], default: :caretaker
 end

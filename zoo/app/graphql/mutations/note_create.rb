@@ -2,7 +2,7 @@
 
 module Mutations
   class NoteCreate < BaseMutation
-    description "Creates a new note"
+    description "Creates a new note. needs an employee_id to indicate the "
 
     field :note, Types::NoteType, null: false
     field :errors, [Types::NoteCreateErrorType]
@@ -11,11 +11,9 @@ module Mutations
 
     #TODO: Move this logic to api
     def resolve(note_input:)
-      note_params = note_input.to_h
-      note = Api::CreateNote.execute(note_params)
-      { note: note }
+      { note: Api::CreateNote.execute(note_params.to_h) }
     rescue Exception => e
-      { errors: [e]}
+      { errors: [e] }
     end
   end
 end
